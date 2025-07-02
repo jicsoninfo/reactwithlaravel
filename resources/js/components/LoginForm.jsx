@@ -65,7 +65,8 @@ const LoginForm = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch('/login', {
+            //const res = await fetch('localhost/reactlaravel/public/login', {
+              const res = await fetch('http://localhost/reactlaravel/public/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

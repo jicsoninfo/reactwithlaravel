@@ -4,10 +4,14 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "resources/js/test.jsx": {
-    "file": "assets/test-CLpSNUzU.js",
-    "name": "test",
-    "src": "resources/js/test.jsx",
-    "isEntry": true
+  "resources/js/app.jsx": {
+    "file": "assets/app-CtuP9oac.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "css": [
+      "assets/app-DhAbcaWn.css",
+      "assets/app-NS0_ynA5.css"
+    ]
   }
 }
