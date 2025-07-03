@@ -46,13 +46,15 @@
 
 import React, { useState } from 'react';
 
-//import axios from 'axios';
+import axios from 'axios';
 
 const LoginForm = () => {
     const [form, setForm] = useState({ email: '', password: '' });
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
+        setErrors({...errors, [e.target.name]: ''})
     };
 
     // const handleSubmit = (e) => {
@@ -73,16 +75,23 @@ const LoginForm = () => {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                 },
                 body: JSON.stringify(form),
+                
             });
-
+            console.log('Login successfully:', res);
             if (res.ok) {
                 alert('Login successful');
-            } else {
+            }else {
+               //  alert('Login failed: ' + (data.message || 'Unknown error'));
                 const error = await res.json();
                 alert('Login failed: ' + error.message);
             }
         } catch (error) {
-            console.error('Login error:', error);
+            if(error.response && error.response.status === 422){
+                setErrors(error.response.data.errors);
+            }else{
+                console.error('Login error:', error);
+            }
+            //console.error('Login error:', error);
         }
     };
 
@@ -113,22 +122,30 @@ const LoginForm = () => {
                 <input
                     type="email"
                     name="email"
-                    className="form-control"
+                    //className="form-control"
+                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                     value={form.email}
                     onChange={handleChange}
-                    required
+                    
                 />
+                {errors.email && (
+                    <span className='text-danger'>{errors.email[0]}</span>
+                )}
             </div>
             <div className="mb-3">
                 <label className="form-label">Password</label>
                 <input
                     type="password"
                     name="password"
-                    className="form-control"
+                    //className="form-control"
+                    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                     value={form.password}
                     onChange={handleChange}
-                    required
+                    
                 />
+                {errors.password && (
+                    <span className='text-danger'>{errors.password[0]}</span>
+                )}
             </div>
             <button type="submit" className="btn btn-primary w-100">
                 Login
