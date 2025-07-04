@@ -12,3 +12,8 @@ Route::get('/', function () {
 });
 
 // Route::post('/login', [LoginController::class, 'login']);
+
+
+Route::get('/01php', function () {
+    return view('php.practice.01php');
+});

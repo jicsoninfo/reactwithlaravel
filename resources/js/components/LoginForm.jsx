@@ -65,7 +65,7 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setErrors({});
         try {
             //const res = await fetch('localhost/reactlaravel/public/login', {
               const res = await fetch('http://localhost/reactlaravel/public/api/login', {
@@ -77,21 +77,27 @@ const LoginForm = () => {
                 body: JSON.stringify(form),
                 
             });
-            console.log('Login successfully:', res);
+            const data = await res.json();
             if (res.ok) {
                 alert('Login successful');
-            }else {
+            }else if (res.status === 422) {
+               setErrors(data.errors || {});
+               //alert('validatation error');
+               //console.log(data.errors);
+            }
+        else {
                //  alert('Login failed: ' + (data.message || 'Unknown error'));
                 const error = await res.json();
                 alert('Login failed: ' + error.message);
             }
         } catch (error) {
-            if(error.response && error.response.status === 422){
-                setErrors(error.response.data.errors);
-            }else{
-                console.error('Login error:', error);
-            }
-            //console.error('Login error:', error);
+            // if(error.response && error.response.status === 422){
+            //     setErrors(error.response.data.errors);
+            // }else{
+            //     console.error('Login error:', error);
+            // }
+            console.error('Login error:', error);
+            //alert('Something went wrong during login.');
         }
     };
 
