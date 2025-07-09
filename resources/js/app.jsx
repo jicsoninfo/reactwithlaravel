@@ -79,3 +79,35 @@ root.render(<App />);
 //     );
 // }
 
+
+
+// ✅ 3. Create missing pages (if not yet)
+// You already have LoginPage, just add placeholders for the rest:
+
+// resources/js/pages/HomePage.jsx
+// jsx
+// Copy
+// Edit
+// import React from 'react';
+
+// export default function HomePage() {
+//     return <div className="container mt-5"><h2>Home Page</h2></div>;
+// }
+// resources/js/pages/BlogsPage.jsx
+// jsx
+// Copy
+// Edit
+// import React from 'react';
+
+// export default function BlogsPage() {
+//     return <div className="container mt-5"><h2>Blogs Page</h2></div>;
+// }
+// resources/js/pages/RegisterPage.jsx
+// jsx
+// Copy
+// Edit
+// import React from 'react';
+
+// export default function RegisterPage() {
+//     return <div className="container mt-5"><h2>Register Page</h2></div>;
+// }
